@@ -1,27 +1,123 @@
-
-#head {
-    position: fixed;
-    top: 0;
-    left: 30vw;
-    height: 8vh;
-    width: 40vw;
-    z-index: 1;
-    background-color: white;
-    opacity: 0.7;
-    /* color: rgba(3, 102, 3, 1); */
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-html, body, #viewDiv {
+
+#head {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 10vh;
+  line-height: 5vh;
+  width: 35vw;
+  background-color: rgba(22, 150, 61, 0.3);
+  font-size: 1vw;
+  font-style: italic;
+  color: rgb(255, 255, 255);
+  text-shadow: 25px 15px rgba(80, 20, 2, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-left: none;
+  border-right: none;
+  z-index: 1;
+}
+#head img {
+  width: 7vw;
+  padding-right: 1vw;
+  opacity: 0.75;
+}
+#nav {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  left: 35vw;
+  width: 50vw;
+  height: 10vh;
+  background-color: rgba(22, 150, 61, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-left: none;
+  border-right: none;
+  z-index: 1;
+}
+.nav {
+  width: 7vw;
+  height: 5vh;
+  line-height: 5vh;
+  text-decoration: none;
+  font-size: 0.8vw;
+  font-style: italic;
+  font-weight: bolder;
+  color: rgb(255, 255, 255);
+  background-color: rgb(110, 185, 80);
+  box-shadow: 1px 1px 6px 2px rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+.nav:hover {
+  transition: 0.7s;
+  transform: scale3d(1.1,1.1,100);
+}
+#adresseD {
+  display: flex;
+  z-index: 2;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 240px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 20px;
+  background-color: white;
+  border: 2px solid rgb(47, 47, 47);
+  padding-left: 10px;
+  color: rgb(0, 66, 14);
+}
+#adresseA {
+  display: flex;
+  z-index: 2;
+  position: fixed;
+  top: 55px;
+  right: 15px;
+  width: 240px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 20px;
+  background-color: white;
+  border: 2px solid rgb(47, 47, 47);
+  padding-left: 10px;
+  color: rgb(114, 38, 28);
+}
+#search {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 10vh;
+  width: 15vw;
+  background-color: rgba(22, 150, 61, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-left: none;
+  border-right: none;
+  z-index: 1;
+}
+
+
+
+
+
+
+#viewDiv {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
-.esri-search_form > input {
-  content: 'adresse'!important; 
+.esri-input::placeholder {
+  color: rgba(255, 255, 255, 0);
 }
-
 #chartPanel {
   background: #fff;
   font: "Avenir Next W00";
@@ -31,7 +127,6 @@ html, body, #viewDiv {
   width: 580px;
   height: 300px;
 }
-
 .chart {
   height: 280px;
 }
