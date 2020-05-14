@@ -1,6 +1,6 @@
 <nav>
     <header id='head'>
-        <img src="jet.png" alt="logoJet">
+        <img id='globe' src="assets/img/jet.png" alt="logoJet">
         <h1 style="text-align: center;">Bienvennu sur BlablaJet n1 du Cojeting ! Rechercher votre Cojeteur</h1>
     </header>
     <div id='nav'>
@@ -8,7 +8,7 @@
         <?php
         if (isset($_SESSION['pseudo'])) {
             if (!empty($_SESSION['avatar'])) {
-                echo '<img src=' . $_SESSION['avatar'] . ' width="40px">';
+                echo '<img src=' . $_SESSION['avatar'] . ' >';
             }
             echo '<p>Bonjour ' . $_SESSION['pseudo'] . '</p>';
         }
@@ -28,6 +28,9 @@
             if ($value === 'index.php') {
                 $ecrit = 'HOME';
             }
+            if ($value === 'indexGlobe.php') {
+                $ecrit = 'Map Globe';
+            }
             if ($value === 'newTrajet.php') {
                 $ecrit = 'Crée votre Trajet';
             }
@@ -37,8 +40,8 @@
             }
         }
         if ((isset($_SESSION['role'])) && ($_SESSION['role'] === "admin")) {
-            echo "<a class='nav' href='mapAdmin.php'>Carte administrateur</a>";
-            echo "<a class='nav' href='userAdmin.php'>User administrateur</a>";
+            echo "<a class='nav' href='mapAdmin.php'>CarteAdministrateur</a>";
+            echo "<a class='nav' href='userAdmin.php'>UserAdministrateur</a>";
         }
 
         if (is_file(__DIR__)) {

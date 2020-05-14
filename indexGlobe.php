@@ -1,5 +1,4 @@
 <?php
-  require_once "libraries/autoloader.php";
 
 ?>
 <html>
@@ -11,13 +10,13 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
   <script src="https://js.arcgis.com/4.14/"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mainGlobe.js"></script>
   <title>BlablaJet</title>
 </head>
 
 <body>
   <?php
-  Nav::displayNav();
+  // Nav::displayNav();
   include('templates/nav.html.php');
   include('templates/index.html.php');
 

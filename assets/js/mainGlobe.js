@@ -125,22 +125,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Créer des view (vue sur le map)
 
-        const view = new MapView({
+        // const view = new MapView({
+        //     container: "viewDiv",
+        //     map: map,
+        //     zoom: 7,
+        //     center: [1.0000, 48.0000],
+        //     constraints: {
+        //         maxScale: 200000,
+        //         minScale: 40000000
+        //     }
+        // }); 
+        const view = new SceneView({
             container: "viewDiv",
             map: map,
             zoom: 7,
-            center: [1.0000, 48.0000],
-            constraints: {
-                maxScale: 200000,
-                minScale: 40000000
-            }
-        }); 
-        // const view = new SceneView({
-        //     container: "viewDiv",
-        //     map: map,
-        //     zoom: 8,
-        //     center: [1.0000, 48.0000]
-        // });
+            center: [1.0000, 48.0000]
+        });
 
 
         var toggle = new BasemapToggle({
@@ -1175,4 +1175,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-

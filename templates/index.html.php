@@ -1,3 +1,4 @@
+<div style="background-color: rgb(17, 17, 17)">
 <div id="viewDiv"></div>
   <div id="chartPanel">
     <form action="admin.php" method="POST">
@@ -38,4 +39,5 @@
         <?php } ?>
       </table>
     </form>
+  </div>
   </div>
