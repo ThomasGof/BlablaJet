@@ -10,7 +10,7 @@
             if (!empty($_SESSION['avatar'])) {
                 echo '<img src=' . $_SESSION['avatar'] . ' >';
             }
-            echo '<p>Bonjour ' . $_SESSION['pseudo'] . '</p>';
+            echo '<p>Bonjour <br>' . $_SESSION['pseudo'] . '</p>';
         }
 
         $racine = __DIR__;

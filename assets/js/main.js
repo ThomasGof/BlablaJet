@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // });
         const featureLayer = new FeatureLayer({
             // create an instance of esri/layers/support/Field for each field object
-            title: "National Monuments",
+            title: "Adresse",
             fields: [
                 {
                     name: "ObjectID",
@@ -87,13 +87,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     type: "oid"
                 },
                 {
-                    name: "Name",
-                    alias: "Name",
+                    name: "NAME",
+                    alias: "NAME",
                     type: "string"
                 },
                 {
-                    name: "Type",
-                    alias: "Type",
+                    name: "TYPE",
+                    alias: "TYPE",
                     type: "string"
                 }
             ],
@@ -106,13 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 symbol: {
                     type: "web-style", // autocasts as new WebStyleSymbol()
                     styleName: "Esri2DPointSymbolsStyle",
-                    name: "landmark"
+                    name: "airport"
                 }
             },
             popupTemplate: {
-                title: "{Name}"
+                title: "{NAME}"
             }
         });
+        console.log(featureLayer);
 
         // Créer des map
         const map = new Map({
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
             basemap: "topo-vector",
             // basemap: "streets",
             ground: "world-elevation",
-            layers: [featureLayer, graphicsLayer2, graphicsLayer1, graphicsLayer3, graphicsLayer4]
+            layers: [featureLayer, graphicsLayer1, graphicsLayer2, graphicsLayer3, graphicsLayer4]
         });
 
         // Créer des view (vue sur le map)
@@ -134,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 maxScale: 200000,
                 minScale: 40000000
             }
-        }); 
+        });
         // const view = new SceneView({
         //     container: "viewDiv",
         //     map: map,
@@ -149,21 +150,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         view.ui.add(toggle, "bottom-right");
 
+        addFeatures();
 
-        const statDefinitions1 = [
-            // "FEM85C10","FEM80C10","FEM75C10","FEM70C10","FEM65C10","FEM60C10","FEM55C10","FEM50C10","FEM45C10",
-            // "FEM40C10","FEM35C10","FEM30C10","FEM25C10","FEM20C10","FEM15C10","FEM10C10","FEM5C10","FEM0C10",
-            // "MALE85C10","MALE80C10","MALE75C10","MALE70C10","MALE65C10","MALE60C10","MALE55C10","MALE50C10","MALE45C10",
-            // "MALE40C10","MALE35C10","MALE30C10","MALE25C10","MALE20C10","MALE15C10","MALE10C10","MALE5C10","MALE0C10"
-        ]
-        // .map(function (fieldName) {
-        //         return {
-        //             onStatisticField: fieldName,
-        //             outStatisticFieldName: fieldName + "_TOTAL",
-        //             statisticType: "sum"
-        //         };
-        //     });
-        console.log(statDefinitions1);
+        // const statDefinitions1 = [
+        //     "NAME","TYPE"
+        //     // "FEM85C10", "FEM80C10", "FEM75C10", "FEM70C10", "FEM65C10", "FEM60C10", "FEM55C10", "FEM50C10", "FEM45C10",
+        //     // "FEM40C10", "FEM35C10", "FEM30C10", "FEM25C10", "FEM20C10", "FEM15C10", "FEM10C10", "FEM5C10", "FEM0C10",
+        //     // "MALE85C10", "MALE80C10", "MALE75C10", "MALE70C10", "MALE65C10", "MALE60C10", "MALE55C10", "MALE50C10", "MALE45C10",
+        //     // "MALE40C10", "MALE35C10", "MALE30C10", "MALE25C10", "MALE20C10", "MALE15C10", "MALE10C10", "MALE5C10", "MALE0C10"
+        // ].map(function (fieldName) {
+        //     return {
+        //         onStatisticField: fieldName,
+        //         outStatisticFieldName: fieldName + "_TOTAL",
+        //         statisticType: "sum"
+        //     };
+        // });
+
 
         const statDefinitions2 = [
             // "FEM85C10","FEM80C10","FEM75C10","FEM70C10","FEM65C10","FEM60C10","FEM55C10","FEM50C10","FEM45C10",
@@ -189,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Lorsque la couche est chargée, créez un observateur pour déclencher le dessin du polygone tampon
             view.whenLayerView(featureLayer).then(function (layerView) {
                 BDDtrajet1 = layerView;
+                console.log(BDDtrajet1);
 
                 rechercheAdresse1 = watchUtils.pausable(
                     layerView,
@@ -211,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const searchDepard = new Search({
                     view: view,
                     resultGraphicEnabled: false,
-                    popupEnabled: false
+                    popupEnabled: false,
                 });
 
                 // Reprendre la fonction drawBufferPolygon (); l'utilisateur a recherché un nouvel emplacement et
@@ -409,9 +412,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Recherchez les tranches d'âge des femmes et des hommes des secteurs de recensement qui se croisent
             // le polygone tampon sur le client
-            queryLayerViewAgeStats1(buffer1).then(function (newData) {
+            queryLayerViewStats1(buffer1).then(function (newData) {
                 // Créer un diagramme de pyramide des âges à partir du résultat renvoyé
-                updateChart(newData);
+                // updateChart(newData);
+                console.log(newData);
             });
 
             // Mettre à jour le graphique de l'étiquette pour afficher la longueur de la polyligne
@@ -455,7 +459,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // le polygone tampon sur le client
             queryLayerViewAgeStats2(buffer2).then(function (newData) {
                 // Créer un diagramme de pyramide des âges à partir du résultat renvoyé
-                updateChart(newData);
+                // updateChart(newData); 
+                console.log(newData);
             });
 
             // Mettre à jour le graphique de l'étiquette pour afficher la longueur de la polyligne
@@ -501,7 +506,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     family: "sans-serif"
                 }
             };
+
         }
+
+
+
 
 
 
@@ -519,48 +528,110 @@ document.addEventListener("DOMContentLoaded", function () {
          * en utilisant le polygone tampon mis à jour.
          *********************************************************************/
 
-        function queryLayerViewAgeStats1(buffer1) {
-            // Stockage des données pour le graphique
-            let femaleAgeData1 = ['nb de point de depard', 0],
-                maleAgeData1 = ['nb de point d arriver', 0];
-            console.log(femaleAgeData1);
-            console.log(maleAgeData1);
 
-            // Requête spatiale côté client:
-            // Obtenez une somme de groupes d'âge pour les secteurs de recensement qui coupent le tampon polygonal
+        // Interrogez la vue des couches pour obtenir des statistiques sur chaque variable d'éducation de la couche
+        function queryLayerViewStats1(buffer1) {
+            const educationFields = [
+                "TYPE",
+                "NAME"
+            ];
+
+            // Crée un objet de requête pour les statistiques de chacun des champs répertoriés ci-dessus
+            const statDefinitions1 = educationFields.map(function (fieldName) {
+                return {
+                    onStatisticField: fieldName,
+                    // onStatisticField: fieldType,
+                    outStatisticFieldName: fieldName + "_TOTAL",
+                    statisticType: "count"
+                };
+            });
+            console.log(statDefinitions1);
+
+
+            // interroger les statistiques des fonctionnalités uniquement dans l'étendue de la vue
             const query = BDDtrajet1.layer.createQuery();
             query.outStatistics = statDefinitions1;
             query.geometry = buffer1;
 
-            // Recherchez les fonctionnalités sur le client à l'aide de BDDtrajet.queryFeatures
-            return BDDtrajet1
-                .queryFeatures(query)
-                .then(function (results) {
-                    // La requête de statistiques renvoie une fonctionnalité avec «stats» comme attributs
-                    const attributes = results.features[0].attributes;
-                    // Parcourez les attributs et enregistrez les valeurs pour les utiliser dans la pyramide des âges.
-                    for (var key in attributes) {
-                        if (key.includes("FEM")) {
-                            femaleAgeData1.push(attributes[key]);
-                        } else {
-                            // Rendre l'ensemble de la population de tous les groupes d'âge masculins négatif afin que
-                            // les données seront affichées à gauche du groupe d'âge des femmes
-                            maleAgeData1.push(-Math.abs(attributes[key]));
-                        }
-                    }
-                    // Informations de retour, séparées par sexe
-                    return [femaleAgeData1, maleAgeData1];
-                })
+            console.log(query);
+            // requêtes de fonctionnalités dans l'étendue de la vue sur le client
+            return BDDtrajet1.queryFeatures(query).then(function (response) {
+                const stats = response.features[0].attributes;
+
+                const updatedData = [
+                    stats.TYPE_TOTAL,
+                    stats.NAME_TOTAL,
+
+                ];
+                console.log(updatedData);
+                // données utilisées pour mettre à jour le graphique à secteurs
+                return {
+                    // total: stats.NAME_TOTAL, 
+                    values: updatedData
+                };
+            })
                 .catch(function (error) {
                     console.log(error);
                 });
         }
+
+        // function queryForWellGeometries() {
+        //     var wellsQuery = wellsLayer.createQuery();
+
+        //     return wellsLayer.queryFeatures(wellsQuery).then(function (response) {
+        //         wellsGeometries = response.features.map(function (feature) {
+        //             return feature.geometry;
+        //         });
+
+        //         return wellsGeometries;
+        //     });
+        // }
+
+
+        // function queryLayerViewAgeStats1(buffer1) {
+        //     // Stockage des données pour le graphique
+        //     let femaleAgeData1 = [],
+        //         maleAgeData1 = [];
+        //     console.log(femaleAgeData1);
+        //     console.log(maleAgeData1);
+
+        //     // Requête spatiale côté client:
+        //     // Obtenez une somme de groupes d'âge pour les secteurs de recensement qui coupent le tampon polygonal
+        //     const query = BDDtrajet1.layer.createQuery();
+        //     query.outStatistics = statDefinitions1;
+        //     query.geometry = buffer1;
+
+        //     // Recherchez les fonctionnalités sur le client à l'aide de BDDtrajet.queryFeatures
+        //     return BDDtrajet1
+        //         .queryFeatures(query)
+        //         .then(function (results) {
+        //             // La requête de statistiques renvoie une fonctionnalité avec «stats» comme attributs
+        //             const attributes = results.features[0].attributes;
+        //             // Parcourez les attributs et enregistrez les valeurs pour les utiliser dans la pyramide des âges.
+        //             for (var key in attributes) {
+        //                 if (key.includes("NAME")) {
+        //                     femaleAgeData1.push(attributes[key]);
+        //                 }
+        //                 else {
+        //                     // Rendre l'ensemble de la population de tous les groupes d'âge masculins négatif afin que
+        //                     // les données seront affichées à gauche du groupe d'âge des femmes
+        //                     maleAgeData1.push(-Math.abs(attributes[key]));
+        //                 }
+        //             }
+        //             // Informations de retour, séparées par sexe
+        //             return [femaleAgeData1, maleAgeData1];
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
+        // }
+
         function queryLayerViewAgeStats2(buffer2) {
             // Stockage des données pour le graphique
             let femaleAgeData2 = ['nb de point de depard', 0],
                 maleAgeData2 = ['nb de point d arriver', 0];
-            console.log(femaleAgeData2);
-            console.log(maleAgeData2);
+            // console.log(femaleAgeData2);
+            // console.log(maleAgeData2);
 
             // Requête spatiale côté client:
             // Obtenez une somme de groupes d'âge pour les secteurs de recensement qui coupent le tampon polygonal
@@ -944,20 +1015,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     LATITUDE: 48.0000,
                     LONGITUDE: 1.0000,
-                    TYPE: "National Monument",
-                    NAME: "Cabrillo National Monument"
+                    TYPE: "Adresse de Depard",
+                    NAME: 5
                 },
                 {
                     LATITUDE: 48.8534,
                     LONGITUDE: 2.3488,
-                    TYPE: "National Monument",
-                    NAME: "Cesar E. Chavez National Monument"
+                    TYPE: "Adresse de Depard",
+                    NAME: 75
                 },
                 {
                     LATITUDE: 48.2000,
                     LONGITUDE: 2.8000,
-                    TYPE: "National Monument",
-                    NAME: "Devils Postpile National Monument"
+                    TYPE: "Adresse de Depard",
+                    NAME: 55
                 },
                 // {
                 //   LATITUDE: 35.2915,
@@ -999,6 +1070,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 graphics.push(graphic);
             }
+            console.log(graphics);
 
             // addEdits object tells applyEdits that you want to add the features
             const addEdits = {
@@ -1028,6 +1100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // edits object tells apply edits that you want to delete the features
                 const deleteEdits = {
                     deleteFeatures: results.features
+
                 };
                 // apply edits to the layer
                 applyEditsToLayer(deleteEdits);
@@ -1052,8 +1125,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             results.deleteFeatureResults.length,
                             "features have been removed"
                         );
-                        addBtn.disabled = false;
-                        removeBtn.disabled = true;
+                        // addBtn.disabled = false;
+                        // removeBtn.disabled = true;
                     }
                     // if features were added - call queryFeatures to return
                     //    newly added graphics
@@ -1072,8 +1145,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                     results.features.length,
                                     "features have been added."
                                 );
-                                addBtn.disabled = true;
-                                removeBtn.disabled = false;
+                                // addBtn.disabled = true;
+                                // removeBtn.disabled = false;
                             });
                     }
                 })
@@ -1089,10 +1162,10 @@ document.addEventListener("DOMContentLoaded", function () {
         search.addEventListener("click", function () {
 
             if (k === 0) {
-                addFeatures();
+                removeFeatures();
                 k++;
             } else if (k === 1) {
-                removeFeatures();
+                addFeatures();
                 k = 0;
             }
         });
@@ -1122,24 +1195,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    let inputD = document.getElementsByClassName('esri-input esri-search__input')[0];
-    let inputA = document.getElementsByClassName('esri-input esri-search__input')[1];
-    // console.log(inputDepardContainer);
-    // let inputDepard = document.createElement("input");
-    // inputDepard.setAttribute('placeholder', 'Adresse de Dépard');
-    // inputDepardContainer.innerHTML = inputDepard;
-
-    let adresseD = document.getElementById('adresseD');
-    let adresseA = document.getElementById('adresseA');
-
-    let z = 0;
-    adresseD.addEventListener("click", function () {
-        adresseD.style.display = 'none';
-        adresseA.style.display = 'none';
-    });
-    adresseA.addEventListener("click", function () {
-        alert('Remplisez dabord le lieu de dépard');
-    });
 
     const anim0 = gsap.from("#head", { duration: 3.5, opacity: 0, x: "random(3000,4000)", y: "random(1500,2500)", scale: 0.3, stagger: 0.5, paused: true });
     const anim1 = gsap.from("#nav", { duration: 2.5, opacity: 0, x: "-1000", stagger: 0.5, paused: true });
@@ -1159,12 +1214,16 @@ document.addEventListener("DOMContentLoaded", function () {
         // document.getElementsByClassName('esri-widget--button')[4].click();
     }, 6000);
 
+    let adresseD = document.getElementById('adresseD');
+    let adresseA = document.getElementById('adresseA');
     let search = document.getElementById('search');
     let nav = document.getElementById('nav');
 
     search.addEventListener('mouseenter', function () {
         search.style.transition = '1s';
         search.style.top = '-9vh';
+        adresseD.style.display = 'none';
+        adresseA.style.display = 'none';
     })
     nav.addEventListener('mouseenter', function () {
         search.style.transition = '1s';
@@ -1172,6 +1231,7 @@ document.addEventListener("DOMContentLoaded", function () {
         adresseD.style.display = 'flex';
         adresseA.style.display = 'flex';
     })
+
 
 
 });

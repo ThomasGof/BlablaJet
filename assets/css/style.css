@@ -5,14 +5,14 @@
 
 
 #head {
+  background-color: rgba(121, 121, 121, 0.6);
   display: flex;
   position: fixed;
   top: 0;
-  left: 0;
+  right: calc(51vw + 280px);
   height: 10vh;
   line-height: 5vh;
   width: 35vw;
-  background-color: rgba(22, 150, 61, 0.3);
   font-size: 1vw;
   font-style: italic;
   color: rgb(255, 255, 255);
@@ -28,22 +28,22 @@
   opacity: 0.75;
 }
 #nav {
+  background-color: rgba(121, 121, 121, 0.6);
   position: fixed;
   display: flex;
   justify-content: space-around;
   align-items: center;
   top: 0;
-  left: 35vw;
-  width: 50vw;
+  right: 280px;
+  width: 51vw;
   height: 10vh;
-  background-color: rgba(22, 150, 61, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.8);
   border-left: none;
   border-right: none;
   z-index: 1;
 }
 #nav img {
-  height: 9vh;
+  height: 6vh;
   border: 2px solid white;
 }
 #nav p {
@@ -63,7 +63,7 @@
   font-style: italic;
   font-weight: bolder;
   color: rgb(255, 255, 255);
-  background-color: rgb(110, 185, 80);
+  background-color: rgb(0, 0, 0);
   box-shadow: 1px 1px 6px 2px rgba(255, 255, 255, 0.8);
   border-radius: 10px;
 }
@@ -81,10 +81,10 @@
   height: 30px;
   line-height: 30px;
   font-size: 20px;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.2);
   border: 2px solid rgb(47, 47, 47);
   padding-left: 10px;
-  color: rgb(0, 66, 14);
+  color: rgb(0, 66, 14,0.85);
 }
 #adresseA {
   display: flex;
@@ -96,18 +96,18 @@
   height: 30px;
   line-height: 30px;
   font-size: 20px;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.2);
   border: 2px solid rgb(47, 47, 47);
   padding-left: 10px;
-  color: rgb(114, 38, 28);
+  color: rgb(114, 38, 28,0.85);
 }
 #search {
+  background-color: rgba(121, 121, 121, 0.6);
   position: fixed;
   top: 0;
   right: 0;
   height: 10vh;
-  width: 15vw;
-  background-color: rgba(22, 150, 61, 0.3);
+  width: 280px;
   border: 2px solid rgba(255, 255, 255, 0.8);
   border-left: none;
   border-right: none;

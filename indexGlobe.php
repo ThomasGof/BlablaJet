@@ -1,5 +1,5 @@
 <?php
-
+ require_once "libraries/autoloader.php";
 ?>
 <html>
 
@@ -16,7 +16,7 @@
 
 <body>
   <?php
-  // Nav::displayNav();
+  Nav::displayNav();
   include('templates/nav.html.php');
   include('templates/index.html.php');
 
